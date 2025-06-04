@@ -4,6 +4,22 @@ author: "Maria Eduarda Jannoni_atividade4"
 date: "2025-06-04"
 output: html_document
 ---
+#Introdução
+
+A Fotoidentificação (foto-ID) é um método em que a identificação dos 
+indivíduos ocorre através de características e marcas naturais do corpo do animal, e é feita através de fotografias ou vídeos (Schofield et al., 2008). Através da identificação de indivíduos dentro de uma população, é possível estudar as taxas de crescimento, estrutura etária, sobrevivência, residência, distribuição, padrões de movimento e tamanho da população, que são informações importantes para estudos ecológicos e 
+comportamentais (Wells and Scott., 1990; Wilson et al., 2006; Holmberg et al., 2009; Bjorndal et al., 2013). A identificação fotográfica é um método de marcação e recaptura não invasivo e de baixo custo.
+Os métodos de Foto-ID desenvolvidos para tartarugas marinhas utilizam 
+principalmente a comparação visual de fotografias dos perfis faciais (Rodriguez &  Martinez., 2000; Reisser et al., 2008; Schofield et al., 2008). 
+O uso das duas laterais da cabeça das tartarugas assegura uma caracterização  mais detalhada e efetiva (Jean et al., 2010), entretanto, caso as duas laterais não estejam disponíveis, é importante considerar essa limitação para a contagem dos indivíduos (Su et al., 2015).
+
+Esse banco de dados é de um resultado de um projeto de Ciência cidadã (https://www.instagram.com/mardetartaruga/). Projeto que atua em Arraial do Cabo e em Fernando de Noronha.
+O banco de dados disponibilizado abrange somente a Ilha de Fernando de Noronha.
+
+Os dados podem ser encontrados no [Internet of Turtles](https://iot.wildbook.org/) procurando pelo ID "maria". Para esse trabalho foram extraídos os encontros (avistamento de um único animal em um local e horário específicos) registrados até a abril de 2025.
+
+
+
 #Carregar pacotes
 ```{r,results = 'hide', message=FALSE}
 library(readxl)
@@ -31,7 +47,7 @@ colors4 <- c ("#7e9700", "#712a78")
 originalenctable <- read_excel("AnnotnExp_2025-04-22.xlsx")
 ```
 
-## deletar colunas ----
+#Deletar colunas ----
 ```{r,}
 colnames(originalenctable)
 
@@ -134,7 +150,6 @@ tableturtlesmin %>%
   dplyr::summarise(n_distinct (Encounter.mediaAsset1.imageUrl))
 ```
 
-
 #mostra a quantidade de individuos unicos revistos
 ```{r,}
 tableturtlesmin %>%
@@ -169,7 +184,7 @@ tableturtlesmin %>%
 turtlesresighted <- tableturtlesmin %>%
   dplyr::filter(Resight == "yes")
 ```
-## photos per month, resight range and filter individuals
+#Fotos por mês, intervalo de visualização e filtro de indivíduos
 ```{r,}
 table_sum <- turtlesresighted %>%
   group_by(Date, Name0.value, Encounter.genus) %>%
@@ -230,3 +245,31 @@ ggplot(table_range, aes(x=diff_anos)) +
              linetype="dashed")+
   facet_grid (rows = vars(Encounter.genus),scales = "free", space = "free")
 ```
+#Referências:
+
+Bjorndal, k.a., j. Parsons, w. Mustin, and a.b. Bolten. (2013). Threshold 
+to maturity in a long-lived reptile: interactions of age, size, and growth. Marine 
+Biology 160:607–616.
+
+Holmberg, j., b. Norman, and z. Arzoumanian. (2009). Estimating population size, structure, and residency time for Whale Sharks Rhincodon typus through collaborative photo-identification. Endangered Species 
+Research 7:39–53. 
+
+Jean, C. Ciccione, S. Talma, E. Ballorain, K. & Bourjea, J. (2010) Photoidentification method for green and hawksbill turtles - first results from 
+Reunion. Indian Ocean Turtle Newsletter, v. 11, p. 8-13
+
+Reisser, J. Proietti, M. Kinas, P. & Sazina, I. (2008). Photographic identification of sea turtles: method description and validation, with an estimation of tag loss. Endangered Species Research. Vol. 5 pp. 73 - 82. 
+
+Rodriguez, P.H. & L.S. Martinez. (2000). Estimation of leatherback nesting females in Mexiquillo Beach during 1995 - 1996 and 1996 - 1997 nestingseason using pit tags and photo-identification. In: International Symposium 
+on Sea Turtle Biology and Conservation.
+
+Schofield, G. et al. (2008) Investigating the viability of photo-identification as an 
+objective tool to study endangered sea turtle populations. Journal of 
+Experimental Marine Biology and Ecology, v. 360, n. 2, p. 103-108.
+
+Su, C.M., C.T. Huang, AND I.J. Cheng. (2015). Applying a fast, effective and reliable photographic identification system for Green Turtles in the waters near Luichiu Island, Taiwan. Journal of Experimental Marine Biology and Ecology 467:115–120. 
+
+Wells, R.S., and M.D. Scott. (1990). Estimating Bottlenose Dolphin population 
+parameters from individual identification and capture-release techniques. 
+Report of the International Whaling Commission Special Issue 12:407–415.
+
+Wilson, S.G., J.J. Polovina, b.s. Stewart, and m.g. Meekan. (2006). Movements of Whale Sharks (Rhincodon typus) tagged at Ningaloo Reef,  Western Australia. Marine Biology 148:1157–1166. 
